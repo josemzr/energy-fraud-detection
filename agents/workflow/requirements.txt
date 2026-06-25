@@ -1,0 +1,8 @@
+langchain-azure-ai[hosting,opentelemetry]>=1.2.4
+langchain>=1.0
+langgraph
+langchain-openai
+azure-ai-projects>=2.0.0
+azure-identity
+azure-search-documents==11.5.3
+httpx==0.28.1

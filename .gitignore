@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Secrets — never commit
+*.env
+!.env.example
+*.pem
+*.key
+
+# Azure / azd
+.azure/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Node / frontend
+node_modules/
+dist/
+.angular/
+
+# MLflow / local artifacts
+mlruns/
+
+# VSCode Workspace
+*.code-workspace
+
+# Local-only files (not part of the shareable repo)
+DEMO_SCRIPT.md
+NOTES.md
+scratch/
+backups/

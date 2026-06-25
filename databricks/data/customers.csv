@@ -1,0 +1,15 @@
+customer_id,name,region,account_age_days,meter_trust_score,past_fraud,property_type,baseline_consumption_kwh
+CUST1001,Alice Johnson,North,820,0.90,false,Single Family Home,450
+CUST1002,Rahul Mehta,East,45,0.40,true,Apartment,280
+CUST1003,Chen Wei,West,200,0.60,false,Townhouse,350
+CUST1004,Fatima Al-Sayed,South,10,0.30,false,Apartment,250
+CUST1005,Maria Gonzalez,Central,365,0.80,false,Single Family Home,420
+CUST1006,John Smith,North,1500,0.95,false,Single Family Home,480
+CUST1007,Igor Petrov,East,90,0.30,true,Industrial Unit,1200
+CUST1008,Aisha Mohamed,South,25,0.20,false,Apartment,220
+CUST1009,David Cohen,West,720,0.88,false,Townhouse,380
+CUST1010,Omar Reza,Central,12,0.10,true,Apartment,260
+CUST1011,Kim Min-Ji,North,540,0.70,false,Townhouse,370
+CUST1012,Hassan Ali,East,30,0.25,true,Commercial Building,950
+CUST1013,Elena Rossi,South,2000,0.92,false,Single Family Home,410
+CUST1014,Mohammed Jafar,West,5,0.15,false,Apartment,240

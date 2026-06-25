@@ -1,0 +1,166 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Energy Fraud Detection (icons)" id="energy-fraud-arch-icons">
+    <mxGraphModel dx="1400" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Energy Fraud Detection — Multi-Agent System on Microsoft Foundry + Databricks" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="8" width="960" height="34" as="geometry" />
+        </mxCell>
+
+        <mxCell id="input" value="Smart-meter reading&#10;flagged as potential&#10;energy fraud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="300" width="130" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- SOC band -->
+        <mxCell id="soc" value="SOC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0f0ed;strokeColor=#2e8b87;dashed=1;verticalAlign=top;align=left;spacingLeft=8;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="180" y="55" width="540" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="defcloud" value="Microsoft Defender for Cloud&#10;— AI Threat Protection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e8b87;fontSize=11;spacingLeft=22;" vertex="1" parent="1">
+          <mxGeometry x="225" y="73" width="235" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_defcloud" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.security.microsoft_defender_for_cloud;" vertex="1" parent="1">
+          <mxGeometry x="229" y="82" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="defxdr" value="Microsoft Defender XDR&#10;(jailbreak / prompt-injection alerts)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e8b87;fontSize=11;spacingLeft=22;" vertex="1" parent="1">
+          <mxGeometry x="478" y="73" width="222" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_defxdr" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.security.microsoft_defender_for_cloud;" vertex="1" parent="1">
+          <mxGeometry x="482" y="82" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="e_def" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#2e8b87;" edge="1" parent="1" source="defcloud" target="defxdr"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Foundry container -->
+        <mxCell id="foundry" value="Microsoft Foundry — Agent Service (LangGraph Hosted Agents · model gpt-4.1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;align=left;spacingLeft=34;spacingTop=4;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="180" y="145" width="640" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_foundry" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.intelligence.cognitive_services;" vertex="1" parent="1">
+          <mxGeometry x="188" y="149" width="22" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="guard" value="Security Guardrail —&#10;Azure AI Content Safety&#10;Prompt Shields" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0bcd6;strokeColor=#9673a6;fontSize=10;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="192" y="180" width="118" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_guard" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.intelligence.content_moderators;" vertex="1" parent="1">
+          <mxGeometry x="238" y="195" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="risk" value="Risk Analyzer&#10;Agent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0bcd6;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="205" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="comp" value="Compliance Report&#10;(workflow step)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede2f1;strokeColor=#9673a6;fontSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="465" y="178" width="135" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="alert" value="Fraud Alert&#10;(workflow step)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede2f1;strokeColor=#9673a6;fontSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="465" y="246" width="135" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="summ" value="Summarize&#10;→ Persist" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0bcd6;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="630" y="205" width="95" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="forensics" value="Forensics Agent&#10;(standalone · NL-to-SQL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0bcd6;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="630" y="300" width="170" height="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_g_r" value="clean" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6f5b7e;fontSize=9;" edge="1" parent="1" source="guard" target="risk"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_r_c" value="fan-out" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6f5b7e;fontSize=9;" edge="1" parent="1" source="risk" target="comp"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_r_a" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6f5b7e;" edge="1" parent="1" source="risk" target="alert"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c_s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6f5b7e;" edge="1" parent="1" source="comp" target="summ"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_a_s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6f5b7e;" edge="1" parent="1" source="alert" target="summ"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Databricks container -->
+        <mxCell id="dbx" value="Azure Databricks Lakehouse" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;align=left;spacingLeft=34;spacingTop=4;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="180" y="388" width="640" height="146" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_dbx" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.analytics.azure_databricks;" vertex="1" parent="1">
+          <mxGeometry x="188" y="392" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="delta" value="Delta Lake —&#10;Bronze → Silver → Gold&#10;customers, transactions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=10;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="195" y="422" width="150" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_delta" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.analytics.azure_databricks;" vertex="1" parent="1">
+          <mxGeometry x="258" y="428" width="24" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="mlserv" value="ML Model Serving&#10;(energy-theft-detector)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=10;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="360" y="426" width="120" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_ml" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.intelligence.machine_learning;" vertex="1" parent="1">
+          <mxGeometry x="408" y="434" width="24" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="genie" value="Genie —&#10;NL-to-SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=10;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="495" y="426" width="110" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_genie" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.analytics.azure_databricks;" vertex="1" parent="1">
+          <mxGeometry x="538" y="434" width="24" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="results" value="analysis_results&#10;(persisted fraud decisions)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=10;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="620" y="426" width="185" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_results" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.databases.azure_sql_database;" vertex="1" parent="1">
+          <mxGeometry x="700" y="434" width="24" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Observability -->
+        <mxCell id="obs" value="OpenTelemetry → Azure Monitor / Application Insights (GenAI traces)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="180" y="554" width="560" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_obs" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.management_governance.application_insights;" vertex="1" parent="1">
+          <mxGeometry x="188" y="564" width="24" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Azure Container Apps -->
+        <mxCell id="aca" value="Azure Container Apps" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;align=left;spacingLeft=34;spacingTop=4;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="850" y="160" width="300" height="375" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_aca" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.compute.container_instances;" vertex="1" parent="1">
+          <mxGeometry x="858" y="164" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="Read-only&#10;REST API (FastAPI)&#10;+ Angular Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="865" y="205" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_api" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.web.app_services;" vertex="1" parent="1">
+          <mxGeometry x="912" y="215" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="apim" value="Azure API Management&#10;→ MCP Server&#10;(optional)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;dashed=1;fontSize=11;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="205" width="135" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_apim" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.web.api_management_services;" vertex="1" parent="1">
+          <mxGeometry x="1055" y="215" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="voice" value="Voice Agent —&#10;Azure Voice Live API&#10;(gpt-realtime)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="865" y="425" width="165" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_voice" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.intelligence.speech_services;" vertex="1" parent="1">
+          <mxGeometry x="935" y="431" width="24" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Personas -->
+        <mxCell id="analyst" value="Fraud Analyst" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontStyle=1;fontSize=12;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.mscae.enterprise.user;" vertex="1" parent="1">
+          <mxGeometry x="905" y="62" width="40" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="customer" value="Customer call&#10;(Azure Communication Services)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=11;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.mscae.enterprise.mobile;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="350" width="34" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="email" value="email summary&#10;(ACS Email)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="450" width="110" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="ic_email" value="" style="sketch=0;html=1;aspect=fixed;outlineConnect=0;shape=mxgraph.mscae.communication.communication_services;" vertex="1" parent="1">
+          <mxGeometry x="1055" y="465" width="22" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- Cross edges -->
+        <mxCell id="e_in_g" value="Meter data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="input" target="guard"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_in_delta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;strokeColor=#999999;" edge="1" parent="1" source="input" target="delta"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_risk_ml" value="Score reading" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="risk" target="mlserv"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_for_genie" value="MCP / NL-to-SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="forensics" target="genie"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_summ_res" value="persist · decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="summ" target="results"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_foundry_def" value="monitored" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;strokeColor=#2e8b87;fontSize=9;" edge="1" parent="1" source="foundry" target="soc"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_dbx_obs" value="Log / Trace" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;dashed=1;strokeColor=#6c8ebf;fontSize=9;" edge="1" parent="1" source="genie" target="obs"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_res_api" value="Fetch data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="results" target="api"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_api_analyst" value="Reading investigations" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="api" target="analyst"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_voice_api" value="Function call" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="voice" target="api"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_cust_voice" value="Customer call" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="customer" target="voice"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_voice_email" value="email summary" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=9;" edge="1" parent="1" source="voice" target="email"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

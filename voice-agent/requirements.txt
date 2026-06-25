@@ -1,0 +1,13 @@
+quart
+quart-cors
+hypercorn
+websockets
+aiohttp
+httpx
+python-dotenv
+azure-core
+azure-identity
+azure-eventgrid
+azure-communication-callautomation
+azure-communication-email
+openai[realtime]

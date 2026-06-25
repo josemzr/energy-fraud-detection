@@ -1,0 +1,13 @@
+# LangGraph Hosted Agents on Microsoft Foundry
+langchain-azure-ai[hosting]>=1.2.4
+langchain>=1.0
+langgraph
+langchain-openai
+langchain-mcp-adapters
+azure-ai-projects>=2.0.0
+azure-identity
+
+# Tools / integrations
+httpx==0.28.1
+azure-search-documents==11.5.3
+python-dotenv

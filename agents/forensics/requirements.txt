@@ -1,0 +1,8 @@
+langchain-azure-ai[hosting,opentelemetry]>=1.2.4
+langchain>=1.0
+langgraph
+langchain-openai
+langchain-mcp-adapters
+azure-ai-projects>=2.0.0
+azure-identity
+httpx==0.28.1

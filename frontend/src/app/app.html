@@ -1,0 +1,258 @@
+<!-- Top navigation -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">⚡</span>
+    <span>Energy Fraud Detection</span>
+  </div>
+  <nav class="topnav">
+    <a class="active">▦ Dashboard</a>
+    <a>⚠ Investigations</a>
+  </nav>
+</header>
+
+@if (detailLoading()) {
+  <main class="hero"><div class="loading">Cargando investigación…</div></main>
+} @else if (detail(); as d) {
+<main class="hero detail">
+  <div class="detail-head">
+    <button class="back" (click)="close()" title="Volver">←</button>
+    <div>
+      <h1 class="detail-title">Investigation {{ shortId(d.analysis_id) }}</h1>
+      <div class="detail-badges">
+        @if (d.risk_level) {
+          <span class="pill" [class.pill-high]="d.risk_level.toLowerCase()==='high'" [class.pill-medium]="d.risk_level.toLowerCase()==='medium'" [class.pill-low]="d.risk_level.toLowerCase()==='low'">{{ d.risk_level }}</span>
+        }
+        @if (d.security_status === 'BLOCKED') {
+          <span class="badge badge-blocked">🛡 BLOCKED</span>
+        } @else {
+          <span class="badge badge-clean">CLEAN</span>
+        }
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Overview</h2>
+  <div class="detail-grid">
+    <div class="card info">
+      <h3>Investigation information</h3>
+      <div class="kv"><span>Status</span><span>
+        @if (d.security_status === 'BLOCKED') { <span class="badge badge-blocked">BLOCKED</span> } @else { <span class="badge badge-clean">CLEAN</span> }
+      </span></div>
+      <div class="kv"><span>Risk score</span><span class="strong">{{ num(d.risk_score) > 0 ? num(d.risk_score) + ' / 100' : '—' }}</span></div>
+      <div class="kv"><span>Risk level</span><span>{{ d.risk_level || '—' }}</span></div>
+      <div class="kv"><span>Fraud probability</span><span>{{ num(d.fraud_probability) > 0 ? (num(d.fraud_probability) | number:'1.2-2') : '—' }}</span></div>
+      <div class="kv"><span>Created</span><span>{{ d.created_at | date:'medium' }}</span></div>
+    </div>
+
+    <div class="card info">
+      <h3>Customer information</h3>
+      <div class="kv"><span>Customer ID</span><span class="strong">{{ d.customer_id }}</span></div>
+      <div class="kv"><span>Name</span><span>{{ d.customer_name || '—' }}</span></div>
+      <div class="kv"><span>Region</span><span>{{ d.region || '—' }}</span></div>
+      <div class="kv"><span>Meter trust score</span><span>{{ num(d.meter_trust_score) > 0 ? (num(d.meter_trust_score) * 100 | number:'1.0-0') + '%' : '—' }}</span></div>
+      <div class="kv"><span>Account age</span><span>{{ num(d.account_age_days) }} days</span></div>
+      <div class="kv"><span>Property type</span><span>{{ d.property_type || '—' }}</span></div>
+      <div class="kv"><span>Fraud history</span><span>
+        @if (isTrue(d.past_fraud)) { <span class="badge badge-blocked">Yes</span> } @else { <span class="badge badge-clean">No</span> }
+      </span></div>
+    </div>
+
+    <div class="card info">
+      <h3>Reading information</h3>
+      <div class="kv"><span>Consumption</span><span class="strong">{{ num(reading(d)['consumption_kwh']) | number }} kWh</span></div>
+      <div class="kv"><span>Baseline</span><span>{{ num(reading(d)['baseline_consumption_kwh'] || d.baseline_consumption_kwh) | number }} kWh</span></div>
+      <div class="kv"><span>vs baseline</span><span>
+        <span class="pill" [class.pill-high]="detailRatio(d)>=1.5" [class.pill-low]="detailRatio(d)<1.1">{{ detailRatio(d) | number:'1.1-1' }}×</span>
+      </span></div>
+      <div class="kv"><span>Meter trust (reading)</span><span>{{ reading(d)['meter_trust'] != null ? (num(reading(d)['meter_trust']) * 100 | number:'1.0-0') + '%' : '—' }}</span></div>
+      <div class="kv"><span>Notes</span><span class="muted">{{ reading(d)['notes'] || '—' }}</span></div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Decision</h2>
+  <div class="card decision">
+    <div class="dec-row">
+      <span class="dec-label">Action</span>
+      <span class="badge act" [class]="actionClass(d)">{{ action(d) }}</span>
+    </div>
+    <div class="dec-row">
+      <span class="dec-label">Reasoning</span>
+      <p class="dec-text">{{ d.fraud_alert || d.summary || '—' }}</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Risk factors</h2>
+  <div class="factors">
+    @for (f of riskFactors(d); track f) {
+      <span class="factor">⚠ {{ f }}</span>
+    }
+  </div>
+
+  @if (d.compliance_report) {
+    <h2 class="section-title">Compliance report</h2>
+    <div class="card narrative"><pre>{{ d.compliance_report }}</pre></div>
+  }
+
+  <footer class="foot">
+    Investigation {{ d.analysis_id }} · read-only · Databricks <code>adbdemo1.fraud.analysis_results</code>
+  </footer>
+</main>
+} @else {
+<main class="hero">
+  <h1 class="hero-title">Fraud investigation pipeline</h1>
+
+  @if (error()) {
+    <div class="banner error">{{ error() }}</div>
+  }
+  <section class="kpis">
+    <div class="card kpi">
+      <div class="kpi-label">Total investigations</div>
+      <div class="kpi-value">{{ total() }}</div>
+      <div class="kpi-sub">All recorded cases</div>
+    </div>
+    <div class="card kpi">
+      <div class="kpi-label">High risk</div>
+      <div class="kpi-value">{{ highRisk() }}</div>
+      <div class="kpi-sub">Cases flagged High</div>
+    </div>
+    <div class="card kpi">
+      <div class="kpi-label">Blocked (security)</div>
+      <div class="kpi-value">{{ blocked() }}</div>
+      <div class="kpi-sub">Prompt-injection attempts stopped</div>
+    </div>
+  </section>
+
+  <!-- Investigations table -->
+  <h2 class="section-title">Customer investigations</h2>
+  <div class="card table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Status</th>
+          <th>Risk level</th>
+          <th>Risk score</th>
+          <th>Fraud probability</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (i of investigations(); track i.analysis_id) {
+          <tr class="row-link" (click)="open(i)">
+            <td>
+              <div class="cust">
+                <span class="avatar" [style.background]="avatarColor(i.customer_id)">{{ initials(i.customer_name, i.customer_id) }}</span>
+                <div class="cust-info">
+                  <span class="cust-id">{{ i.customer_name || i.customer_id }}</span>
+                  <span class="cust-sub">{{ i.customer_id }}{{ i.region ? ' · ' + i.region : '' }}</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              @if (i.security_status === 'BLOCKED') {
+                <span class="badge badge-blocked">🛡 BLOCKED</span>
+              } @else {
+                <span class="badge badge-clean">CLEAN</span>
+              }
+            </td>
+            <td>
+              @if (i.risk_level) {
+                <span class="pill" [class.pill-high]="i.risk_level.toLowerCase()==='high'" [class.pill-medium]="i.risk_level.toLowerCase()==='medium'" [class.pill-low]="i.risk_level.toLowerCase()==='low'">{{ i.risk_level }}</span>
+              } @else {
+                <span class="muted">—</span>
+              }
+            </td>
+            <td>
+              @if (num(i.risk_score) > 0) {
+                <div class="score">
+                  <div class="score-bar"><span [style.width.%]="num(i.risk_score)" [class.bar-high]="num(i.risk_score)>=70" [class.bar-mid]="num(i.risk_score)>=40 && num(i.risk_score)<70"></span></div>
+                  <span class="score-num">{{ num(i.risk_score) }}</span>
+                </div>
+              } @else {
+                <span class="muted">—</span>
+              }
+            </td>
+            <td>{{ num(i.fraud_probability) > 0 ? (num(i.fraud_probability) | number:'1.2-2') : '—' }}</td>
+            <td class="muted">{{ i.created_at | date:'short' }}</td>
+          </tr>
+        }
+        @if (!loading() && investigations().length === 0) {
+          <tr><td colspan="6" class="empty">No hay investigaciones todavía. Ejecuta el workflow para generar casos.</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Latest readings table -->
+  <h2 class="section-title">Latest meter readings</h2>
+  <div class="card table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Consumption (kWh)</th>
+          <th>Baseline (kWh)</th>
+          <th>vs baseline</th>
+          <th>Meter</th>
+          <th>Type</th>
+          <th>Timestamp</th>
+          <th class="center">Flag</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (r of readings(); track r.reading_id) {
+          <tr>
+            <td>
+              <div class="cust">
+                <span class="avatar" [style.background]="avatarColor(r.customer_id)">{{ initials(r.customer_name, r.customer_id) }}</span>
+                <div class="cust-info">
+                  <span class="cust-id">{{ r.customer_name || r.customer_id }}</span>
+                  <span class="cust-sub">{{ r.customer_id }}{{ r.region ? ' · ' + r.region : '' }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="strong">{{ num(r.consumption_kwh) | number }}</td>
+            <td class="muted">{{ num(r.baseline_consumption_kwh) | number }}</td>
+            <td>
+              <span class="pill" [class.pill-high]="ratio(r)>=1.5" [class.pill-low]="ratio(r)<1.1">{{ ratio(r) | number:'1.1-1' }}×</span>
+            </td>
+            <td class="muted">{{ r.meter_id }}</td>
+            <td class="muted">{{ r.reading_type }}</td>
+            <td class="muted">{{ r.timestamp | date:'short' }}</td>
+            <td class="center">
+              @if (flagged(r)) { <span class="flag flag-on">⚑</span> } @else { <span class="flag">⚐</span> }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bottom summary cards -->
+  <section class="summary">
+    <div class="card sum">
+      <div class="kpi-label">Average risk score</div>
+      <div class="kpi-value big">{{ avgRisk() | number:'1.0-1' }}</div>
+    </div>
+    <div class="card sum">
+      <div class="kpi-label">By risk level</div>
+      <div class="chips">
+        <span class="chip chip-high">HIGH: {{ byLevel().High }}</span>
+        <span class="chip chip-medium">MEDIUM: {{ byLevel().Medium }}</span>
+        <span class="chip chip-low">LOW: {{ byLevel().Low }}</span>
+      </div>
+    </div>
+    <div class="card sum">
+      <div class="kpi-label">By status</div>
+      <div class="chips">
+        <span class="chip chip-clean">CLEAN: {{ byStatus().CLEAN }}</span>
+        <span class="chip chip-blocked">BLOCKED: {{ byStatus().BLOCKED }}</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    Read-only · data from Databricks lakehouse (<code>adbdemo1.fraud</code>) · Energy Fraud Detection
+  </footer>
+</main>
+}

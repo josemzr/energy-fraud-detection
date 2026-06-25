@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/microsoft/AgentSchema/refs/heads/main/schemas/v1.0/ContainerAgent.yaml
+
+kind: hosted
+name: workflow
+description: |
+    Energy fraud detection workflow. Orchestrates the LangGraph flow
+    customer_data -> risk_analyzer -> (compliance_report | fraud_alert), anchoring
+    the risk verdict on the governed Databricks ML model. Invocations protocol.
+metadata:
+    tags:
+        - LangGraph
+        - Energy Fraud
+        - Workflow
+protocols:
+    - protocol: invocations
+      version: 1.0.0
+resources:
+    cpu: "0.5"
+    memory: 1Gi
+environment_variables:
+    - name: AZURE_AI_MODEL_DEPLOYMENT_NAME
+      value: 'gpt-4.1'
+    - name: MODEL_SERVING_ENDPOINT
+      value: 'https://<databricks-workspace>.azuredatabricks.net/serving-endpoints/energy-theft-detector/invocations'
+    - name: MODEL_SERVING_TOKEN
+      value: '${MODEL_SERVING_TOKEN}'
+    - name: MODEL_SERVING_TIMEOUT
+      value: '90'
+    - name: AZURE_SEARCH_ENDPOINT
+      value: 'https://<search-service>.search.windows.net'
+    - name: AZURE_SEARCH_API_KEY
+      value: '${AZURE_SEARCH_API_KEY}'
+    - name: REGULATIONS_INDEX_NAME
+      value: 'regulations-policies'
+    - name: CONTENT_SAFETY_ENDPOINT
+      value: 'https://<ai-services-account>.cognitiveservices.azure.com'
+    - name: CONTENT_SAFETY_KEY
+      value: '${CONTENT_SAFETY_KEY}'
+    - name: DATABRICKS_WORKSPACE_HOSTNAME
+      value: '<databricks-workspace>.azuredatabricks.net'
+    - name: DATABRICKS_WAREHOUSE_ID
+      value: '<warehouse-id>'
+    - name: RESULTS_TABLE
+      value: '<catalog>.<schema>.analysis_results'
+code_configuration:
+    runtime: python_3_13
+    entry_point: main.py
+    dependency_resolution: remote_build

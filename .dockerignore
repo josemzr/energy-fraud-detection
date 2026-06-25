@@ -1,0 +1,18 @@
+# Keep the ACR build context small and secret-free.
+.git/
+.venv/
+**/__pycache__/
+**/*.pyc
+.env
+*.env
+.env.*
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+agents/
+databricks/
+images/
+.azure/
+*.ipynb
+*.md
+DEMO_SCRIPT.md
