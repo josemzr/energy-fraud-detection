@@ -14,10 +14,6 @@ read‑only **Angular dashboard** and a **voice agent** customers can call.
 
 ## Architecture
 
-> Replace the placeholder below with your exported diagram at
-> `docs/images/architecture.png`. A faithful Mermaid version is included as a
-> fallback (GitHub renders it natively).
-
 ![Architecture](docs/images/architecture.png)
 
 ```mermaid
